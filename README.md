@@ -1,115 +1,128 @@
-# ⌚ Veloce Co. - Premium E-Commerce Platform ✨
+# Veloce Co. — Premium E-Commerce Platform
 
-Aplikasi *front-end* web e-commerce premium berbasis web responsive yang dirancang khusus untuk katalog jam tangan eksklusif. Proyek ini dikembangkan secara modular untuk memastikan struktur kode bersih, rapi, dan siap diintegrasikan dengan sistem backend maupun platform *live hosting* seperti GitHub Pages.
-
----
-
-## 💼 I. Ikhtisar Bisnis (Business Overview)
-
-### 🏢 1. Profil Bisnis & Proposisi Nilai
-* **Nama Bisnis:** Veloce Co.
-* **Deskripsi Bisnis:** Platform e-commerce ritel modern yang mengurasi dan menyediakan jam tangan mewah, kasual-sport, dan klasik orisinal dari berbagai merek global ternama dengan jaminan garansi internasional.
-* **Proposisi Nilai (Value Proposition):** 
-    * *Authenticity Guaranteed:* Jaminan 100% keaslian produk dengan sertifikasi resmi.
-    * *Seamless Premium Experience:* Antarmuka pengguna yang mewah, minimalis, cepat, dan responsif.
-    * *Secure Sandbox Transaction:* Simulasi gerbang pembayaran terenkripsi untuk membangun kepercayaan pelanggan sebelum bertransaksi.
-
-### 🎯 2. Target Pasar & Segmentasi Pelanggan
-* **Segmentasi Demografis:** Pria dan wanita berusia 21–55 tahun, berpenghasilan menengah ke atas (profesional, eksekutif, pengusaha, kolektor).
-* **Segmentasi Geografis:** Area urban dan sub-urban besar di Indonesia (Jabodetabek, Surabaya, Bandung, Medan, dll).
-* **Segmentasi Psikografis:** Individu yang menghargai ketepatan waktu, status sosial, estetika mode tingkat tinggi, serta menganggap jam tangan sebagai investasi penampilan sekaligus instrumen fungsional.
-
-### 📊 3. Analisis Pasar & Lanskap Pesaing
-* **Analisis Pasar Singkat:** Pasar jam tangan premium di Indonesia terus berkembang seiring dengan meningkatnya kesadaran terhadap gaya hidup mewah dan kebutuhan representasi profesional. Penjualan digital menjadi saluran krusial untuk menjangkau konsumen di luar kota-kota utama.
-* **Analisis Pesaing:**
-    * *Pesaing Langsung:* Jamtangan.com (Maju Mandiri) – Kuat di pasar *mass-market* dengan diskon besar tetapi UI kurang terasa eksklusif.
-    * *Pesaing Tidak Langsung:* Chrono24 – Platform global pasar sekunder yang besar, namun memiliki kendala pada biaya pengiriman internasional, pajak bea cukai, serta kerumitan verifikasi lokal.
-    * *Posisi Veloce Co.:* Mengisi celah (*gap*) dengan menawarkan UI/UX ritel yang mewah layaknya butik fisik, kurasi produk terfokus, dan pengalaman transaksi lokal yang mulus.
-
-### 📦 4. Strategi Manajemen Produk & Katalog
-Katalog dikelola secara modular pada file data terpisah (`js/products.js`), terbagi dalam 3 kategori utama:
-1. **Luxury:** Jam tangan mekanis/automatic premium berlapis material berharga (contoh: *Veloce Chrono Gold*, *Rolex Air-King*).
-2. **Sport:** Jam tangan dengan durabilitas tinggi, fitur taktis, atau integrasi pintar (contoh: *Fossil Machine*, *Apex Smart Sport Pro*).
-3. **Classic:** Desain minimalis, tipis, abadi dengan strap kulit premium (contoh: *Classic Heritage Minimalist*).
-
-*Strategi Visual & Deskripsi:* Setiap produk disajikan dengan foto resolusi tinggi berlatar belakang estetis (*lifestyle asset*) dan dilengkapi deskripsi produk yang menonjolkan keunggulan material (seperti *sapphire crystal*, kulit Italia, *carbon fiber*) untuk memicu keinginan membeli (*impulse buying*).
-
-### 💰 5. Model Bisnis & Aliran Pendapatan
-* **Model Bisnis:** B2C (Business-to-Consumer) Ritel Online Direct. Veloce Co. membeli stok langsung dari distributor resmi (*authorized distributor*) dalam volume besar untuk mendapatkan harga grosir, lalu menjualnya kembali ke konsumen akhir via platform digital.
-* **Aliran Pendapatan (Revenue Streams):**
-    * Keuntungan margin langsung dari penjualan unit jam tangan (*Core Product Sales*).
-    * Penjualan layanan bernilai tambah (*Value-Added Services*) seperti perpanjangan masa garansi kustom (*extended warranty*) dan paket kotak hadiah premium (*exclusive gift wrapping*).
-
-### 🏷️ 6. Strategi Harga, Promosi, dan Diskon
-* **Strategi Harga:** Menggunakan *Value-Based Pricing* untuk lini Luxury (menetapkan harga tinggi sesuai persepsi prestise produk) dan *Competitive Pricing* untuk lini Sport dan Classic.
-* **Strategi Promosi & Diskon:**
-    * *Scarcity & Urgency Strategy:* Menampilkan tag eksklusif dan jumlah stok terbatas pada detail produk.
-    * *Seasonal Campaign:* Pemberian potongan harga atau voucer pengiriman gratis pada periode hari belanja nasional atau hari raya besar yang dikalkulasi otomatis pada *State Management* aplikasi.
-
-### 💳 7. Proses Checkout & Simulasi Payment Gateway
-* **Gerbang Pembayaran:** Terintegrasi dengan **Simulasi Sandbox Midtrans API**.
-* **Alur Kerja Transaksi:**
-    1. Pengguna memilih produk dan meninjau pesanan di komponen `js/cart.js`.
-    2. Tombol checkout memicu modal formulir pengiriman di `js/checkout.js`.
-    3. Saat formulir dikirim (*submit*), sistem memicu `.loading-overlay` yang menyimulasikan proses jabat tangan (*handshake*) protokol token Midtrans SNAP selama 3 detik.
-    4. Setelah simulasi otentikasi selesai, aplikasi mengosongkan status keranjang secara aman di `localStorage` dan menampilkan notifikasi sukses beserta petunjuk instruksi transfer bayar Virtual Account/QRIS.
-
-### 🔒 8. Rencana SEO, Keamanan, dan Pemeliharaan
-* **Rencana SEO (Search Engine Optimization):**
-    * Penerapan tag meta semantik (Title, Description, Keywords) yang dioptimasi untuk kata kunci "Jam Tangan Mewah Jakarta", "Premium Watch Indonesia".
-    * Penyediaan kerangka data terstruktur *Open Graph* untuk optimasi tampilan pratinjau tautan ketika dibagikan ke media sosial.
-* **Rencana Keamanan:**
-    * Penggunaan enkripsi SSL/HTTPS pada hosting produksi (GitHub Pages secara bawaan sudah menyediakan SSL).
-    * Sanitasi input formulir pada sisi klien untuk mencegah injeksi teks skrip dasar.
-    * Pemisahan *State Logic* internal agar data transaksi jangka pendek tidak mudah dimanipulasi dari konsol browser luar.
-* **Rencana Pemeliharaan (Maintenance):**
-    * Pembersihan berkala berkas sampah memori pada `Web Storage API / LocalStorage`.
-    * Pemberian pembaruan basis data array produk di `products.js` secara teratur tanpa mengganggu jalannya struktur DOM inti halaman web.
-
-### 📊 9. Penggunaan Data Analitik untuk Pengambilan Keputusan
-* **Integrasi Tracking:** Platform mengintegrasikan cuplikan kode pelacakan *Google Analytics* tag dummy (`G-DUMMY12345`) di dalam `index.html`.
-* **Metrik Keputusan Bisnis:**
-    * *Data Pencarian & Filter:* Menganalisis kata kunci yang sering diketik konsumen di kolom pencarian untuk menentukan tren produk apa yang harus ditambah ketersediaan stoknya.
-    * *Conversion Rate & Cart Abandonment:* Memantau perbandingan jumlah pengguna yang memasukkan produk ke keranjang belanja dengan jumlah pengguna yang menyelesaikan formulir checkout guna mengevaluasi efektivitas harga atau alur antarmuka aplikasi.
-    * *User Engagement (Wishlist Data):* Memanfaatkan data kuantitas produk favorit di wishlist untuk merancang program promo/diskon yang disasarkan secara spesifik pada produk dengan minat tinggi tersebut.
+*Veloce Co.* adalah platform e-commerce premium omni-channel berbasis web responsive yang dikurasi khusus untuk menyediakan jam tangan mewah, kasual, dan olahraga original dari merek-merek kelas dunia. Menggabungkan arsitektur front-end modern dengan integrasi fitur retail yang lengkap, platform ini menghadirkan pengalaman berbelanja eksklusif yang mulus bagi para kolektor dan antusias horologi.
 
 ---
 
-## 🛠️ II. Penjelasan Teknis & Arsitektur Kode
+## 🏢 1. Ikhtisar Bisnis (Business Overview)
 
-### 📂 Struktur Repositori (GitHub Root Structure)
-Semua file diletakkan pada tingkat terluar (*root*) tanpa dibungkus folder induk tambahan agar jalur (*path*) pemanggilan file relatif pada GitHub Pages dapat terintegrasi dengan sempurna:
+### Nama Bisnis
+* Veloce Co. (di bawah naungan PT Veloce Krono Internasional)
+
+### Deskripsi Bisnis
+* Veloce Co. adalah kurator arloji global resmi yang melayani pasar ritel mewah. Platform ini dirancang tidak hanya sebagai toko daring (online store), melainkan sebagai ekosistem digital terpercaya yang menjembatani para kolektor jam tangan dengan produk high-end yang dijamin 100% otentik.
+
+### Proposisi Nilai (Value Proposition)
+* Guaranteed Authenticity: Setiap produk dilengkapi dengan sertifikat keaslian internasional, nomor seri resmi, dan garansi global.
+* Curated Exclusivity: Menghadirkan koleksi langka (vintage / limited edition) yang sulit didapatkan di ritel konvensional.
+* Seamless Luxury Experience: Pelayanan pelanggan kelas atas termasuk konsultasi langsung via WhatsApp, pengiriman berasuransi penuh, dan sistem multi-mata uang (IDR, USD, EUR) untuk pelanggan global.
+
+---
+
+## 🎯 2. Target Pasar & Segmentasi Pelanggan
+
+*Veloce Co.* membagi segmentasi pelanggannya ke dalam tiga pilar utama:
+
+### Segmentasi Demografis
+* Usia: 25 – 55 tahun (Profesional muda, eksekutif, pengusaha, hingga kolektor senior).
+* Pendapatan: Kelas menengah ke atas (Affluent & High-Net-Worth Individuals).
+* Geografi: Domestik (Indonesia) sebagai pasar utama (seperti kawasan urban Jabodetabek, Bandung, Surabaya), serta kawasan Asia Tenggara untuk pasar sekunder.
+
+### Segmentasi Psikografis
+* Status & Prestige: Individu yang memandang jam tangan sebagai simbol pencapaian finansial, identitas sosial, dan wibawa profesional.
+* Kolektor & Investor: Konsumen yang paham nilai historis jam tangan dan memandangnya sebagai instrumen investasi alternatif (resale value tinggi).
+* Lifestyle & Utility Enthusiasts: Konsumen aktif yang mencari perpaduan fungsionalitas olahraga (seperti smartwatch/chronograph) dengan estetika premium.
+
+---
+
+## 📊 3. Analisis Pasar Singkat & Lanskap Pesaing
+
+### Analisis Pasar
+* Pasar jam tangan mewah dan premium terus menunjukkan tren pertumbuhan yang solid. Jam tangan kini telah bergeser dari sekadar penunjuk waktu menjadi aset cair (liquid asset) dan pernyataan gaya hidup (lifestyle statement). Keterbatasan suplai dari produsen utama meningkatkan urgensi terhadap platform kurator sekunder yang andal secara daring.
+
+### Analisis Pesaing (Competitive Analysis)
+* Chrono24 / The Time Place (Pesaing Tidak Langsung/Nasional):
+    * Kekuatan: Jaringan fisik luas, nama merek sudah sangat besar di mal mewah.
+    * Kelemahan: Struktur biaya tinggi berimbas pada harga akhir konsumen yang lebih mahal; adaptasi fitur digital lokal terkadang lambat.
+* Jamtangan.com / Machtwatch (Pesaing Langsung):
+    * Kekuatan: Volume produk masif, harga kompetitif untuk kelas entry-to-mid level.
+    * Kelemahan: Fokus pada kuantitas massal, mengurangi kesan eksklusivitas (luxury vibe) bagi konsumen kelas atas.
+* Keunggulan Kompetitif Veloce Co.: Fokus pada segmen hyper-curated (hanya item terbaik), interaksi personal via integrasi chat WhatsApp instan, sistem multi-bahasa dan multi-mata uang yang adaptif, serta visualisasi produk yang bersih dan minimalis tanpa distraksi iklan.
+
+---
+
+## 🛍️ 4. Strategi Manajemen Produk & Katalog
+
+Katalog *Veloce Co.* dikelola menggunakan pembagian segmen gender (Pria & Wanita) serta klasifikasi gaya hidup untuk mempermudah navigasi pengguna:
+
+### Kategori Utama
+* Luxury (Kemewahan Abadi): Jam tangan mekanis otomatis dengan material premium (Emas 18K, Platina, Kristal Safir). Contoh produk: Rolex Air-King Precision Vintage, Rolex Celini Gold, Versace Palazzo Empire.
+* Sport (Performa & Ketangguhan): Arloji dengan ketahanan air tinggi, fitur chronograph, pengukur langkah, hingga smartwatch modern. Contoh produk: Fossil Machine, Casio Baby-G Step Tracker, Apple Watch Midnight.
+* Classic (Estetika Minimalis & Vintage): Desain ultra-tipis, strap kulit Italia, cocok untuk penggunaan formal harian. Contoh produk: Seiko Presage Cocktail Time, Julius Oval Leather.
+
+### Strategi Visual & Deskripsi
+* Visual: Setiap item dipajang dengan foto beresolusi tinggi (high-fidelity image) yang memperlihatkan detail dial, bezel, dan tekstur strap guna membangun kepercayaan visual sebelum membeli.
+* Deskripsi Menarik: Menggunakan pendekatan cerita (storytelling copy) yang menekankan keunikan arsitektur jam, kegunaan spesifik (misal: "dial sunburst berkilau layaknya gelas koktail premium"), dan kelangkaannya.
+
+---
+
+## 💸 5. Model Bisnis & Aliran Pendapatan (Revenue Streams)
+
+*Veloce Co.* menerapkan model bisnis *Direct-to-Consumer (D2C) Retail B2C* dengan beberapa diversifikasi pendapatan:
+* Penjualan Produk Langsung (Direct Sales Margin): Pendapatan utama yang diperoleh dari selisih harga jual retail konsumen dengan harga modal/basis produk (base price).
+* Premium Consignment Service (Consignment): Skema komisi sebesar 5% - 8% bagi kolektor luar yang ingin menitipkan jam tangan langka mereka untuk dikurasi dan dijual melalui ekosistem Veloce Co.
+* Layanan Purna Jual & Perawatan Eksklusif: Biaya tambahan opsional untuk perpanjangan garansi lokal, pembersihan ultrasonik arloji, serta penggantian strap kulit premium secara berkala.
+
+---
+
+## 🏷️ 6. Strategi Harga, Promosi, dan Diskon
+
+### Strategi Harga (Pricing Strategy)
+* Menggunakan metode Value-Based Pricing untuk kategori Luxury (harga mencerminkan kelangkaan, prestise, dan nilai investasi produk) serta Competitive Pricing untuk kategori Sport dan Classic guna merebut pasar dari kompetitor ritel masif.
+
+### Promosi dan Diskon
+* Multi-Currency Dynamic Adjustment: Harga otomatis dikonversi secara presisi berdasarkan mata uang terpilih (IDR, USD, EUR) guna memudahkan kalkulasi pembeli internasional.
+* Bundle & Privilege Discount: Potongan harga khusus bagi pelanggan terautentikasi (melalui sistem login Role-Based Access) dan penawaran paket khusus (misalnya: Pembelian jam tangan pintar mendapatkan potongan 10% untuk strap tambahan).
+
+---
+
+## 💳 7. Proses Checkout & Simulasi Payment Gateway (Xendit/Midtrans Dummy)
+
+Platform ini mengadopsi alur transaksi otomatis yang aman dengan visualisasi konfirmasi instan:
 
 ```text
-📦 veloce-ecommerce (GitHub Repository Root)
- ├── 📄 index.html              # Kerangka utama halaman (DOM Layout) & Integrasi Analytics Tag
- ├── 📄 README.md               # Dokumentasi, analisis bisnis, dan rencana operasional proyek
- ├── 📂 css/                    
- │   └── 📄 styles.css          # Desain tata letak grid, tema warna, & arsitektur animasi
- ├── 📂 js/                     
- │   ├── 📄 products.js         # Array basis data produk lokal (Mock Data Katalog)
- │   ├── 📄 cart.js             # Logika operasional & sinkronisasi Keranjang Belanja
- │   ├── 📄 wishlist.js         # Logika operasional & sinkronisasi Daftar Keinginan
- │   ├── 📄 checkout.js         # Manajemen form order & simulasi pemuatan transaksi Sandbox
- │   └── 📄 app.js              # Otak aplikasi, penanganan Event Listener, fitur pencarian, & filter
- └── 📂 images/                 # Folder penyimpanan aset gambar produk dan latar belakang secara lokal
+[Keranjang Belanja] ➔ [Klik Proses Pembayaran] ➔ [Isi Form Data & Pilih Metode] ➔ [Simulasi Pending/Loading Gateway] ➔ [Halaman Sukses + QRIS/VA]
 ```
 
----
-
-## 💻 III. Teknologi yang Digunakan
-
-* **HTML5:** Digunakan untuk menyusun struktur semantik halaman web yang SEO-friendly.
-* **CSS3 (Modern Layout):** 
-    * *CSS Variables:* Mempermudah pengelolaan palet warna global.
-    * *Flexbox & CSS Grid:* Diimplementasikan untuk membangun sistem grid katalog produk otomatis (*auto-fill*) dan komponen navigasi adaptif.
-    * *Media Queries:* Untuk optimasi tampilan responsif layar seluler.
-* **Vanilla JavaScript (ES6+):** Digunakan secara modular untuk menangani logika aplikasi, manipulasi DOM, manajemen status (*State Management*), serta integrasi penyimpanan lokal (*Web Storage API / LocalStorage*).
-* **Google Fonts:** Menggunakan *font family* Poppins untuk menunjang tipografi antarmuka yang modern, bersih, dan eksklusif.
+### Simulasi Integrasi Payment Gateway (Dummy Xendit/Midtrans)
+* Saat pengguna menekan tombol Confirm Order, sistem memicu status loading state (durasi 2 detik) guna mensimulasikan proses jabat tangan jembatan API (API handshake) ke peladen payment gateway.
+* Metode QRIS: Sistem secara dinamis membuat kode QR unik menggunakan pustaka qrcode.js berdasarkan ID transaksi konsumen. Konsumen memindai kode QR tersebut langsung dari layar untuk menyelesaikan pembayaran.
+* Metode Transfer/COD: Sistem secara cerdas menyembunyikan kontainer kode QR dan langsung mengeluarkan teks nota instruksi resmi sesuai dengan nama dan email pembeli.
 
 ---
 
-## 👤 IV. Pengembang (Developer Profile)
+## 🔒 8. Rencana SEO, Keamanan, dan Pemeliharaan (Maintenance)
+### Rencana SEO (Search Engine Optimization)
+* Semantic HTML Markup: Memaksimalkan penggunaan tag <header>, <main>, <section>, dan <footer> agar struktur ramah terhadap perayap Google (Google Crawler).
+* Dynamic Image Alt Text: Memberikan deskripsi alt gambar otomatis berbasis nama produk guna mendominasi hasil pencarian Google Images pada kata kunci produk jam tangan terkait.
+* Page Load Speed Optimization: Memisahkan berkas aset (HTML, CSS, JS terpisah) untuk mereduksi blocking time pemuatan halaman pertama (First Contentful Paint).
 
-* **Nama Pengembang:** Nuraisya Wafika Hasanah
-* **Tujuan Proyek:** Proyek ini dikembangkan bertujuan untuk mempraktikkan keterampilan pengembangan web *front-end* dan desain UI/UX, menguji fungsionalitas tata letak responsif pada studi kasus *e-commerce* retail, serta membangun kerangka aplikasi web modular yang bersih dan siap di-host melalui GitHub Pages.
+### Rencana Keamanan (Security)
+* Role-Based Access Control (RBAC): Memproteksi rute sensitif. Fitur penambahan keranjang, melihat detail, dan mengakses dashboard penjualan wajib melalui otentikasi login akun (buyer / seller).
+* Data Masking: Penyembunyian karakter kata sandi di lapisan klien (client-side masking) dan pembersihan muatan (payload sanitization) pada masukan formulir pembayaran untuk mencegah serangan injeksi naskah (XSS Attack).
+
+### Rencana Pemeliharaan (Maintenance)
+* Pembaruan berkala pustaka pihak ketiga secara terjadwal (Chart.js, FontAwesome) untuk menambal celah kerentanan keamanan baru.
+* Pembersihan memori (garbage collection) pada instance grafik dashboard penjualan untuk mencegah kebocoran memori browser (memory leaks) saat penjelajah ditinggalkan terbuka dalam waktu lama.
+
+---
+
+## 📈 9. Rencana Penggunaan Data Analitik Untuk Pengambilan Keputusan
+Veloce Co. tidak bergerak berdasarkan asumsi, melainkan berbasis data (data-driven business):
+
+### Analisis Grafik Penjualan (Sales Analytics)
+* Melalui integrasi visual komponen Chart.js pada Dashboard Penjual, manajemen dapat memantau pergerakan omset bulanan secara real-time. Jika terjadi tren penurunan di bulan tertentu, sistem analitik ini memicu tim pemasaran untuk segera menggelar kampanye promosi terarah.
+
+### Manajemen Metrik Profitabilitas & Stok
+* Net Profit Monitoring: Dashboard otomatis mengkalkulasi selisih harga jual dengan basePrice produk untuk memantau margin laba bersih murni, bukan sekadar omset kotor.
+* Low Stock Alert System: Data kuantitas stok yang terhubung langsung pada tabel admin memberikan sinyal visual instan kapan produk tertentu harus dipasok ulang (restock) ke distributor sebelum kehabisan inventaris toko.
