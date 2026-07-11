@@ -92,8 +92,7 @@ Semua file diletakkan pada tingkat terluar (*root*) tanpa dibungkus folder induk
  │   ├── 📄 wishlist.js         # Logika operasional & sinkronisasi Daftar Keinginan
  │   ├── 📄 checkout.js         # Manajemen form order & simulasi pemuatan transaksi Sandbox
  │   └── 📄 app.js              # Otak aplikasi, penanganan Event Listener, fitur pencarian, & filter
- └── 📂 assets/                 
-     └── 📂 images/             # Folder penyimpanan aset gambar produk dan latar belakang secara lokal
+ └── 📂 images/                 # Folder penyimpanan aset gambar produk dan latar belakang secara lokal
 ```
 
 ---
