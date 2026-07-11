@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veloce Co. | Premium E-Commerce</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left-controls">
+                <button id="login-nav-btn" class="login-btn" onclick="openLoginModal()">Login</button>
+                <div id="user-info-status" style="font-size: 0.85rem; color: #cbd5e1; display: none;"></div>
+                
+                <select id="lang-switcher" onchange="switchLanguage(this.value)">
+                    <option value="id">🌐 ID</option>
+                    <option value="en">🌐 EN</option>
+                </select>
+
+                <select id="currency-switcher" onchange="switchCurrency(this.value)">
+                    <option value="IDR">Rp (IDR)</option>
+                    <option value="USD">$ (USD)</option>
+                    <option value="EUR">€ (EUR)</option>
+                </select>
+            </div>
+
+            <a href="#" class="brand-logo" onclick="showSection('buyer')">Veloce<span>Co.</span></a>
+            
+            <div class="search-bar" id="search-bar-wrapper">
+                <input type="text" id="search-input" placeholder="Cari jam tangan impian Anda..." oninput="filterProducts()">
+            </div>
+
+            <div class="filter-selects-wrapper">
+                <select id="gender-filter" onchange="filterProducts()">
+                    <option value="all">Semua Gender</option>
+                    <option value="pria">Pria</option>
+                    <option value="wanita">Wanita</option>
+                </select>
+                <select id="category-filter" onchange="filterProducts()">
+                    <option value="all">Semua Gaya</option>
+                    <option value="luxury">Luxury</option>
+                    <option value="sport">Sport</option>
+                    <option value="classic">Classic</option>
+                </select>
+            </div>
+
+            <div class="nav-actions" id="nav-actions-wrapper">
+                <button class="wishlist-toggle-btn" id="wishlist-toggle-btn" onclick="toggleSidebar('wishlist-sidebar')">❤️ Wishlist (<span id="wishlist-count">0</span>)</button>
+                <button class="cart-btn" id="cart-toggle-btn" onclick="toggleSidebar('cart-sidebar')">🛒 Keranjang (<span id="cart-count">0</span>)</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container" style="margin-top: 2rem; margin-bottom: 4rem;">
+        
+        <div id="buyer-section">
+            <header class="hero-banner">
+                <div class="hero-content">
+                    <h1 id="txt-hero-title">Kemewahan Waktu dalam Genggaman</h1>
+                    <p id="txt-hero-desc">Koleksi jam tangan premium original dari brand ternama dunia dengan pelayanan eksklusif.</p>
+                    <a href="#products-section" class="btn-shop-now" id="txt-hero-btn">Jelajahi Produk</a>
+                </div>
+            </header>
+
+            <section id="products-section" style="padding-top: 3rem;">
+                <div id="section-pria-wrapper">
+                    <h2 class="catalog-section-title" id="txt-catalog-pria-title">Katalog Unggulan <span>Pria</span></h2>
+                    <div class="products-grid" id="products-pria-container"></div>
+                </div>
+
+                <div id="section-wanita-wrapper" style="margin-top: 4rem;">
+                    <h2 class="catalog-section-title" id="txt-catalog-wanita-title">Katalog Unggulan <span>Wanita</span></h2>
+                    <div class="products-grid" id="products-wanita-container"></div>
+                </div>
+
+                <div id="search-empty-fallback" style="display: none; text-align: center; padding: 3rem; color: gray;">
+                    Produk tidak ditemukan.
+                </div>
+            </section>
+
+            <section class="static-reviews-section">
+                <h2 id="txt-static-review-title">Apa Kata Mereka?</h2>
+                <div class="static-reviews-container">
+                    <div class="static-review-card">
+                        <div class="static-stars">⭐⭐⭐⭐⭐</div>
+                        <p class="static-review-text">"Pelayanan Sangat Memuaskan! Prosesnya cepat, komunikasinya sangat ramah, dan hasilnya benar-benar sesuai dengan ekspektasi. Sangat direkomendasikan untuk siapa saja yang mencari kualitas dan profesionalisme."</p>
+                        <p class="static-review-author">— Rian K.</p>
+                    </div>
+                    <div class="static-review-card">
+                        <div class="static-stars">⭐⭐⭐⭐⭐</div>
+                        <p class="static-review-text">"Sangat Terpercaya & Profesional. Informasi yang diberikan sangat jelas dan respons timnya cepat saat dihubungi lewat email maupun WhatsApp. Sukses terus!"</p>
+                        <p class="static-review-author">— Siti A.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="seller-dashboard-section" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 2px solid var(--border-color); padding-bottom: 1rem;">
+                <h2>📊 Dashboard Penjual & Profitabilitas</h2>
+                <button class="btn-remove-item" onclick="logout()" style="padding: 0.5rem 1rem;">Keluar Admin</button>
+            </div>
+            
+            <div class="admin-stats-grid">
+                <div class="stat-card bg-revenue">
+                    <h4>Total Pendapatan (Omset)</h4>
+                    <p id="admin-total-revenue">Rp 0</p>
+                </div>
+                <div class="stat-card bg-profit">
+                    <h4>Net Profitabilitas (Laba Bersih)</h4>
+                    <p id="admin-total-profit">Rp 0</p>
+                </div>
+                <div class="stat-card bg-sold">
+                    <h4>Produk Terjual</h4>
+                    <p id="admin-total-sold">0 Pcs</p>
+                </div>
+            </div>
+
+            <div class="dashboard-wrapper">
+                <h3>📈 Grafik Analisis Kinerja Penjualan</h3>
+                <div class="chart-container">
+                    <canvas id="salesChart"></canvas>
+                </div>
+            </div>
+
+            <div class="dashboard-wrapper">
+                <h3>✏️ Manajemen Harga & Pembaruan Stok</h3>
+                <div style="overflow-x: auto; margin-top: 1rem;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr style="background: #f1f5f9; border-bottom: 2px solid var(--border-color);">
+                                <th style="padding: 0.75rem;">Produk</th>
+                                <th>Harga (IDR)</th>
+                                <th>Harga (USD)</th>
+                                <th>Harga (EUR)</th>
+                                <th>Stok Toko</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-product-rows"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+            <h3 id="txt-cart-sidebar-title">Keranjang Belanja</h3>
+            <button onclick="toggleSidebar('cart-sidebar')" style="background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--text-light);">✕</button>
+        </div>
+        <div id="cart-items-container"></div>
+        <div class="cart-total">
+            <h4 id="txt-cart-total-label">Total:</h4>
+            <h3 id="cart-total-price">Rp 0</h3>
+        </div>
+        <button class="checkout-btn" id="txt-checkout-btn" onclick="openCheckoutModal()" style="width:100%; margin-top:1rem;">Proses Pembayaran</button>
+    </div>
+
+    <div class="cart-sidebar" id="wishlist-sidebar" style="background-color: #1e293b;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+            <h3 id="txt-wishlist-sidebar-title">Daftar Keinginan (Wishlist)</h3>
+            <button onclick="toggleSidebar('wishlist-sidebar')" style="background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--text-light);">✕</button>
+        </div>
+        <div id="wishlist-items-container"></div>
+    </div>
+
+    <div id="login-modal" class="modal">
+        <div class="modal-content" style="max-width: 400px; padding: 2rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+                <h3>Masuk Akun</h3>
+                <span style="cursor:pointer; font-size:1.2rem;" onclick="closeLoginModal()">✕</span>
+            </div>
+            <form id="login-form" onsubmit="handleLogin(event)">
+                <div style="margin-bottom: 1rem;">
+                    <label style="display:block; font-size:0.85rem; margin-bottom:0.3rem;">Pilih Role Anda:</label>
+                    <select id="login-role" style="width:100%; padding:0.6rem; border-radius:4px; border:1px solid var(--border-color);">
+                        <option value="buyer">Pembeli (Akses Fitur & Belanja)</option>
+                        <option value="seller">Penjual (Akses Fitur Data Admin)</option>
+                    </select>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label style="display:block; font-size:0.85rem; margin-bottom:0.3rem;">Username:</label>
+                    <input type="text" id="login-username" placeholder="Masukkan 'admin' atau nama Anda" style="width:100%; padding:0.6rem; border-radius:4px; border:1px solid var(--border-color);" required>
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display:block; font-size:0.85rem; margin-bottom:0.3rem;">Password:</label>
+                    <input type="password" id="login-password" placeholder="Masukkan password" style="width:100%; padding:0.6rem; border-radius:4px; border:1px solid var(--border-color);" required>
+                </div>
+                <button type="submit" class="btn-add-cart" style="width: 100%; padding: 0.75rem;">Masuk</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="detail-modal" class="modal">
+        <div class="modal-content" style="max-width: 700px;">
+            <span class="close-modal" onclick="closeModal('detail-modal')">✕</span>
+            <div id="detail-product-body"></div>
+        </div>
+    </div>
+
+    <div id="checkout-modal" class="modal">
+        <div class="modal-content" style="max-width:500px;">
+            <span class="close-modal" onclick="closeModal('checkout-modal')">✕</span>
+            <h3 id="txt-checkout-form-title">Formulir Pembayaran</h3>
+            <form id="order-form" onsubmit="handleCheckoutSubmit(event)" style="margin-top:1.5rem;">
+                <label style="display:block; margin-top:0.5rem;" id="txt-label-name">Nama Lengkap</label>
+                <input type="text" id="customer-name" required placeholder="Contoh: Nuraisya Wafika" style="width:100%; padding:0.5rem; margin-bottom:1rem;">
+                
+                <label style="display:block;" id="txt-label-email">Alamat Email</label>
+                <input type="email" id="customer-email" required placeholder="name@domain.com" style="width:100%; padding:0.5rem; margin-bottom:1rem;">
+                
+                <label style="display:block;" id="txt-label-payment">Metode Pembayaran</label>
+                <select id="payment-method" required style="width:100%; padding:0.5rem; margin-bottom:1rem;">
+                    <option value="qris">QRIS (Otomatis Tampil Barcode)</option>
+                    <option value="transfer">Transfer Bank Virtual Account</option>
+                    <option value="cod">Cash on Delivery (COD)</option>
+                </select>
+                
+                <button type="submit" class="checkout-btn" id="txt-confirm-order-btn" style="width:100%; margin-top:1.5rem;">Konfirmasi Pemesanan</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-box" style="text-align:center; background:white; padding:2rem; border-radius:8px; max-width:400px; width:90%;">
+            <div id="payment-loading-screen">
+                <div class="spinner"></div>
+                <p style="margin-top:1rem; font-weight:600;" id="txt-processing-payment">Memproses transaksi Anda...</p>
+            </div>
+            <div id="payment-success-screen" style="display:none;">
+                <span style="font-size: 3rem;">✅</span>
+                <h3 style="color:var(--primary-color); margin-top:0.5rem;" id="txt-payment-success-title">Transaksi Sukses!</h3>
+                <p id="success-message-text" style="font-size:0.9rem; margin:1rem 0; color:#475569;"></p>
+                
+                <div id="qrcode-area" style="display:none; margin: 1.5rem 0; padding:1rem; border:2px dashed var(--accent-color); background:#fffbeb;">
+                    <p style="font-size:0.75rem; font-weight:600; color:var(--accent-color); margin-bottom:0.5rem;" id="txt-qrcode-instruction">PINDAI KODE QR DI BAWAH UNTUK MEMBAYAR</p>
+                    <div id="qrcode-container"></div>
+                </div>
+
+                <button class="btn-add-cart" id="txt-success-done-btn" onclick="closeSuccessScreen()" style="padding:0.6rem 2rem;">Selesai</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="brand-logo" style="display:inline-block; margin-bottom:1rem;">Veloce<span>Co.</span></a>
+                    <p id="txt-footer-about">Destinasi kurasi jam tangan premium original terbaik untuk menunjang wibawa dan penampilan eksklusif Anda.</p>
+                </div>
+                <div class="footer-col">
+                    <h5 id="txt-footer-hubungi">Hubungi Kami</h5>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>📧 Email: <a href="mailto:support@velocechrono.co">support@velocechrono.co</a></li>
+                        <li>📞 WhatsApp: +62 812-3456-7890</li>
+                        <li>📍 Showroom: Lantai 2, Luxury Block Center, Jakarta</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5 id="txt-footer-kategori">Kategori Populer</h5>
+                    <ul>
+                        <li><a href="#products-section">✨ Luxury Watches</a></li>
+                        <li><a href="#products-section">🏃 Sport Chronograph</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <div class="social-icons-wrapper">
+                        <h4>Follow Us</h4>
+                        <div class="social-icons">
+                            <a href="javascript:void(0)" onclick="handleSocialClick('https://www.instagram.com/velocechrono.co')" class="instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="javascript:void(0)" onclick="handleSocialClick('https://www.tiktok.com/@velocechrono.co')" class="tiktok"><i class="fab fa-tiktok"></i></a>
+                            <a href="javascript:void(0)" onclick="handleSocialClick('https://www.facebook.com/velocechrono.co')" class="facebook"><i class="fab fa-facebook"></i></a>
+                            <a href="javascript:void(0)" onclick="handleSocialClick('https://www.youtube.com/@velocechrono')" class="youtube"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/wishlist.js"></script>
+    <script src="js/checkout.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
