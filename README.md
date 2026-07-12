@@ -7,7 +7,7 @@
 ## 💼 I. Ikhtisar Bisnis (Business Overview)
 
 ### 1. Nama Bisnis, Deskripsi, dan Proposisi Nilai
-* Nama Bisnis: Veloce Co. (di bawah naungan PT Veloce Krono Internasional).
+* Nama Bisnis: Veloce Co.
 * Deskripsi Bisnis: Kurator arloji global resmi yang melayani pasar ritel mewah. Platform ini dirancang sebagai ekosistem digital terpercaya yang menjembatani para kolektor jam tangan dengan produk high-end yang dijamin 100% otentik.
 * Proposisi Nilai: Menyediakan jaminan keaslian internasional (*Guaranteed Authenticity*), kurasi produk langka (*Curated Exclusivity*), serta pengalaman transaksi premium lokal yang mulus (*Seamless Luxury Experience*).
 
@@ -80,7 +80,7 @@
 
 ## 🛠️ II. Penjelasan Teknis & Arsitektur Kode (Technical Architecture)
 
-### 10. Struktur Repositori Terbuka (GitHub Root Layout)
+### 1. Struktur Repositori Terbuka (GitHub Root Layout)
 * Seluruh file diletakkan langsung pada root direktori utama untuk memastikan kompatibilitas jalur data relatif (relative path navigation) saat dilakukan proses hosting pada GitHub Pages:
 ```text
 📦 veloce-ecommerce (GitHub Repository Root)
@@ -99,14 +99,33 @@
 
 ---
 
-### 11. Arsitektur JavaScript Modular & Manajemen Status (State Management)
+### 2. Arsitektur JavaScript Modular & Manajemen Status (State Management)
 * Variabel Global Terpusat: Berkas js/app.js bertindak sebagai kernel aplikasi yang mempertahankan status runtime seperti tipe mata uang aktif (currentCurrency), bahasa aktif (currentLanguage), objek sesi pengguna (currentUser), serta grafik penjualan (salesChartInstance).
 * Sinkronisasi Antar Komponen: Aksi penambahan produk di js/products.js akan langsung memicu pembaruan antarmuka pada js/cart.js dan memutakhirkan kalkulasi laba bersih pada tabel inventaris sisi admin secara real-time.
 
 ---
 
-### 12. Tumpukan Teknologi Frontend (Tech Stack Details)
+### 3. Tumpukan Teknologi Frontend (Tech Stack Details)
 * HTML5 Semantik: Memanfaatkan tag tata letak murni modern (`<nav>`, `<main>`, `<section>`, `<footer>`) guna menyusun arsitektur ramah mesin perayap SEO dan performa responsif.
 * CSS3 Grid & Flexbox: Memakai unit dinamis `repeat(auto-fill, minmax(280px, 1fr))` untuk menampilkan kartu katalog produk secara otomatis menyesuaikan resolusi layar (Mobile, Tablet, Desktop) tanpa kerusakan layout.
 * Vanilla JavaScript (ES6+): Menolak penggunaan framework berat pihak ketiga demi mempertahankan loading speed halaman yang maksimal (mencapai First Contentful Paint yang optimal).
 * Pustaka Eksternal Terintegrasi: Chart.js untuk kompilasi data analitik menjadi grafik garis penjualan, qrcode.js untuk enkripsi data transaksi instan menjadi gambar barcode QRIS, dan FontAwesome untuk simbol ikonik antarmuka.
+
+---
+
+## 💻 III. Teknologi yang Digunakan
+
+* **HTML5:** Digunakan untuk menyusun struktur semantik halaman web yang SEO-friendly.
+* **CSS3 (Modern Layout):** 
+    * *CSS Variables:* Mempermudah pengelolaan palet warna global.
+    * *Flexbox & CSS Grid:* Diimplementasikan untuk membangun sistem grid katalog produk otomatis (*auto-fill*) dan komponen navigasi adaptif.
+    * *Media Queries:* Untuk optimasi tampilan responsif layar seluler.
+* **Vanilla JavaScript (ES6+):** Digunakan secara modular untuk menangani logika aplikasi, manipulasi DOM, manajemen status (*State Management*), serta integrasi penyimpanan lokal (*Web Storage API / LocalStorage*).
+* **Google Fonts:** Menggunakan *font family* Poppins untuk menunjang tipografi antarmuka yang modern, bersih, dan eksklusif.
+
+---
+
+## 👤 IV. Pengembang (Developer Profile)
+
+* **Nama Pengembang:** Nuraisya Wafika Hasanah
+* **Tujuan Proyek:** Proyek ini dikembangkan bertujuan untuk mempraktikkan keterampilan pengembangan web *front-end* dan desain UI/UX, menguji fungsionalitas tata letak responsif pada studi kasus *e-commerce* retail, serta membangun kerangka aplikasi web modular yang bersih dan siap di-host di GitHub Pages
